@@ -1,0 +1,47 @@
+<html>
+<head>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script>
+	<script>
+AWS.config.update({
+  region: "us-east-1",
+  // accessKeyId default can be used while using the downloadable version of DynamoDB. 
+  // For security reasons, do not store AWS Credentials in your files. Use Amazon Cognito instead.
+  accessKeyId: "AKIAY6XNNX5RIPUENGMW",
+  // secretAccessKey default can be used while using the downloadable version of DynamoDB. 
+  // For security reasons, do not store AWS Credentials in your files. Use Amazon Cognito instead.
+  secretAccessKey: "kR0CLPnfUovJH4fpK5QxV349XHlZqxq+4qo6lMxG"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+
+function queryData() {
+    document.getElementById('textarea').innerHTML += "Querying all expenses. ";
+
+    var params = {
+        TableName : "alexa-home-expenses-dev",
+        ProjectionExpression:"createdAt, updatedAt"
+    };
+
+    docClient.scan(params, function(err, data) {
+        if (err) {
+            document.getElementById('textarea').innerHTML += "Unable to query. Error: " + "\n" + JSON.stringify(err, undefined, 2);
+        } else {
+            document.getElementById('textarea').innerHTML += "Categories: " + "\n" + JSON.stringify(data, undefined, 2);
+        }
+    });
+}
+
+</script>
+
+</head>
+
+<body>
+	<input id="queryData" type="button" value="Query" onclick="queryData();" />
+<br><br>
+<textarea readonly id= "textarea" style="width:400px; height:800px"></textarea>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+{
+	"name": "alexa-demo",
+	"version": "1.0.0",
+	"description": "Alexa Demo",
+	"main": "handler.js",
+	"dependencies": {
+		"ajv": "^7.0.0-beta.9",
+		"alexa-sdk": "^1.0.25",
+		"aws-sdk": "^2.263.1"
+	}
+}
