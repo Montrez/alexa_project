@@ -140,7 +140,7 @@ const handlers = {
         }
     },
     'ScheduleAppointment': function(){
-        var note = this.event.request.intent.slots.Category.note;
+        var note = this.event.request.intent.slots.note.value;
         var timestamp = new Date().getTime();
         var userId = this.event.context.System.user.userId;
         if ((typeof(note) != "undefined")) {
@@ -153,6 +153,7 @@ const handlers = {
                     note: note,
                     startDate: timestamp,
                     endDate: timestamp,
+                    createdAt: timestamp
                 },
             };
             const params = {
