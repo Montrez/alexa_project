@@ -141,8 +141,9 @@ const handlers = {
     },
     'ScheduleAppointment': function(){
         var note = this.event.request.intent.slots.note.value;
+        var serialNumber = this.event.request.intent.slots.serialNumber.value;
         var timestamp = new Date().getTime();
-        var userId = this.event.context.System.user.userId;
+        var userId = this.event.context.System.device.deviceId;
         if ((typeof(note) != "undefined")) {
             console.log("\n\nLoading handler\n\n");
             const dynamodbParams = {
@@ -153,7 +154,8 @@ const handlers = {
                     note: note,
                     startDate: timestamp,
                     endDate: timestamp,
-                    createdAt: timestamp
+                    createdAt: timestamp,
+                    serialNumber: serialNumber
                 },
             };
             const params = {
